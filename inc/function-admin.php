@@ -25,6 +25,7 @@ add_action( 'admin_menu', 'gattoverde_add_admin_page' );
 
 function gattoverde_custom_settings() {
 
+	register_setting( 'gattoverde-settings-group', 'profile_picture' );
 	register_setting( 'gattoverde-settings-group', 'first_name' );
 	register_setting( 'gattoverde-settings-group', 'last_name' );
 	register_setting( 'gattoverde-settings-group', 'user_description' );
@@ -34,6 +35,7 @@ function gattoverde_custom_settings() {
 	
 	add_settings_section( 'gattoverde-sidebar-options', 'Sidebar Options', 'gattoverde_sidebar_options', 'x_gattoverde' );
 
+	add_settings_field( 'sidebar-profile-picture', 'Profile Picture', 'gattoverde_sidebar_profile_picture', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-name', 'Full Name', 'gattoverde_sidebar_name', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-user-description', 'User Description', 'gattoverde_sidebar_user_description', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-twitter', 'Twitter Handler', 'gattoverde_sidebar_twitter', 'x_gattoverde', 'gattoverde-sidebar-options' );
@@ -48,6 +50,12 @@ function gattoverde_sidebar_options() {
 
 }
 
+function gattoverde_sidebar_profile_picture() {
+	$profile_picture = esc_attr( get_option( 'profile_picture' ) );
+
+	echo '<input type="button" value="Upload profile Picture" id="upload-button" class="button button-secondary"/>';
+	echo '<input type="hidden" name="profile_picture" id="profile-picture" value="' . $profile_picture . '" />';
+}
 function gattoverde_sidebar_name() {
 	$first_name = esc_attr( get_option( 'first_name' ) );
 	$last_name = esc_attr( get_option( 'last_name' ) );
@@ -58,7 +66,6 @@ function gattoverde_sidebar_name() {
 function gattoverde_sidebar_user_description() {
 	$user_description = esc_attr( get_option( 'user_description' ) );
 	echo '<input type="text" name="user_description" value="' . $user_description . '" placeholder="Someting about you" />';
-
 }
 
 function gattoverde_sidebar_twitter() {

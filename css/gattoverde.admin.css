@@ -11,3 +11,6 @@ h1.gattoverde-username,
 h2.gattoverde-user-description { font-weight: 100; color: #fff; }
 h1.gattoverde-username { font-size: 24px; margin: 0 0 10px; }
 h2.gattoverde-user-description { font-size: 13px; margin: 0 0 20px; }
+
+.image-container { disply: block; width: 100%; overflow: hidden; text-align: center; }
+.profile-picture { width: 122px; height: 122px; overflow: hidden; border-radius: 50%; margin: 20px auto; background-position: center center; background-repeat: no-repeat; background-size: cover; }
