@@ -26,8 +26,17 @@ add_action( 'admin_menu', 'gattoverde_add_admin_page' );
 function gattoverde_custom_settings() {
 
 	register_setting( 'gattoverde-settings-group', 'first_name' );
+	register_setting( 'gattoverde-settings-group', 'last_name' );
+	register_setting( 'gattoverde-settings-group', 'twitter_handler', 'gattoverde_sanitize_twitter_handler' );
+	register_setting( 'gattoverde-settings-group', 'facebook_handler' );
+	register_setting( 'gattoverde-settings-group', 'gplus_handler' );
+	
 	add_settings_section( 'gattoverde-sidebar-options', 'Sidebar Options', 'gattoverde_sidebar_options', 'x_gattoverde' );
-	add_settings_field( 'sidebar-name', 'First Name', 'gattoverde_sidebar_name', 'x_gattoverde', 'gattoverde-sidebar-options' );
+
+	add_settings_field( 'sidebar-name', 'Full Name', 'gattoverde_sidebar_name', 'x_gattoverde', 'gattoverde-sidebar-options' );
+	add_settings_field( 'sidebar-twitter', 'Twitter Handler', 'gattoverde_sidebar_twitter', 'x_gattoverde', 'gattoverde-sidebar-options' );
+	add_settings_field( 'sidebar-facebook', 'Facebook Handler', 'gattoverde_sidebar_facebook', 'x_gattoverde', 'gattoverde-sidebar-options' );
+	add_settings_field( 'sidebar-gplus', 'Google+ Handler', 'gattoverde_sidebar_gplus', 'x_gattoverde', 'gattoverde-sidebar-options' );
 
 }
 
@@ -40,8 +49,30 @@ function gattoverde_sidebar_options() {
 function gattoverde_sidebar_name() {
 
 	$first_name = esc_attr( get_option( 'first_name' ) );
-	echo '<input type="text" name="first_name" value="' . $first_name . '" placeholder="First Name" />';
+	$last_name = esc_attr( get_option( 'last_name' ) );
 
+	echo '<input type="text" name="first_name" value="' . $first_name . '" placeholder="First Name" />';
+	echo '<input type="text" name="last_name" value="' . $last_name . '" placeholder="Last Name" />';
+
+}
+
+function gattoverde_sidebar_twitter() {
+	$twitter = esc_attr( get_option( 'twitter_handler' ) );
+	echo '<input type="text" name="twitter_handler" value="' . $twitter . '" placeholder="Twitter" /><p class="description">Insert your Twitter Username. The @ will be stripped out</p>';
+}
+function gattoverde_sidebar_facebook() {
+	$facebook = esc_attr( get_option( 'facebook_handler' ) );
+	echo '<input type="text" name="facebook_handler" value="' . $facebook . '" placeholder="Facebook" />';
+}
+function gattoverde_sidebar_gplus() {
+	$gplus = esc_attr( get_option( 'gplus_handler' ) );
+	echo '<input type="text" name="gplus_handler" value="' . $gplus . '" placeholder="Google+" />';
+}
+
+// Sanitize Twitter Handler
+function gattoverde_sanitize_twitter_handler( $input ) {
+	$output = sanitize_text_field( $input );
+	return str_replace( '@', '', $output );
 }
 
 /**
