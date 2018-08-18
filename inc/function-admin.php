@@ -6,14 +6,15 @@
  */
 
 function gattoverde_add_admin_page() {
-
 	// Create the main page for theme
 	// add_menu_page( 'Gatto Verde Theme Options', 'Gatto Verde', 'manage_options', 'x_gattoverde', 'gattoverde_theme_create_page', get_template_directory_uri(). '/img/sunset-icon.png', 110 );
 	add_menu_page( 'Gatto Verde Theme Options', 'Gatto Verde', 'manage_options', 'x_gattoverde', 'gattoverde_theme_create_page', 'dashicons-art', 110 );
 
 	// Create the subpage
 	// add_submenu_page( 'x_gattoverde', 'Gatto Verde Settings', 'Settings', 'manage_options', 'x_gattoverde_settings', 'gattoverde_theme_settings_page' );
-	add_submenu_page( 'x_gattoverde', 'Gatto Verde Theme Options', 'Settings', 'manage_options', 'x_gattoverde', 'gattoverde_theme_create_page' ); // we have used the same structure for not having a page repetitions
+	add_submenu_page( 'x_gattoverde', 'Gatto Verde Sidebar Options', 'Sidebar', 'manage_options', 'x_gattoverde', 'gattoverde_theme_create_page' ); // we have used the same structure for not having a page repetitions
+
+	add_submenu_page( 'x_gattoverde', 'Gatto Verde Theme Options', 'Theme Options', 'manage_options', 'x_gattoverde_theme_options', 'gattoverde_theme_options_page' );
 
 	add_submenu_page( 'x_gattoverde', 'Gatto Verde CSS Options', 'Custom CSS', 'manage_options', 'x_gattoverde_css', 'gattoverde_theme_css_page' );
 
@@ -25,6 +26,7 @@ add_action( 'admin_menu', 'gattoverde_add_admin_page' );
 
 function gattoverde_custom_settings() {
 
+	// SIDEBAR OPTIONS
 	register_setting( 'gattoverde-settings-group', 'profile_picture' );
 	register_setting( 'gattoverde-settings-group', 'first_name' );
 	register_setting( 'gattoverde-settings-group', 'last_name' );
@@ -42,12 +44,48 @@ function gattoverde_custom_settings() {
 	add_settings_field( 'sidebar-facebook', 'Facebook Handler', 'gattoverde_sidebar_facebook', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-gplus', 'Google+ Handler', 'gattoverde_sidebar_gplus', 'x_gattoverde', 'gattoverde-sidebar-options' );
 
+	// THEME OPTIONS
+	register_setting( 'gattoverde-theme-options-group', 'post_formats', 'gattoverde_post_formats_callback' );
+
+	add_settings_section( 'gattoverde-theme-options', 'Theme Options', 'gattoverde_theme_options', 'x_gattoverde_theme_options' );
+
+	add_settings_field( 'post-formats', 'Post Formats', 'gattoverde_post_formats', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
+	
 }
 
+////// THEME OPTIONS
+// Post formats callback function
+function gattoverde_post_formats_callback( $input ) {
+	return $input;
+}
+
+// activate specific theme support
+function gattoverde_theme_options() {
+	echo 'Activate/Deactivate Specific Theme Options';
+}
+
+function gattoverde_post_formats() {
+	$options = get_option( 'post_formats' );
+	$formats = array( 'aside', 'image', 'gallery', 'link', 'quote', 'status', 'video', 'audio', 'chat' );
+	$output = '';
+
+	foreach ( $formats as $format ) {
+		$checked = ( @$options[ $format ] == 1 ) ? ' checked="checked"' : '';
+		$output .= '<label><input type="checkbox" id="' . $format . '" name="post_formats[' . $format . ']" value="1" ' . $checked . ' />' . $format . '</label><br>';
+	}
+	echo $output;
+}
+
+function gattoverde_theme_options_page() {
+	
+	// generation of sub page 
+	require_once( get_template_directory() . '/inc/templates/gattoverde-theme-options.php' );
+
+}
+
+///// SIDEBAR SECTION
 function gattoverde_sidebar_options() {
-
 	echo 'Customize Sidebar Info';
-
 }
 
 function gattoverde_sidebar_profile_picture() {
@@ -93,13 +131,9 @@ function gattoverde_sanitize_twitter_handler( $input ) {
 function gattoverde_theme_create_page() {
 
 	// generation of admin main page
-	require_once get_template_directory() . '/inc/templates/gattoverde-admin.php';
+	require_once( get_template_directory() . '/inc/templates/gattoverde-admin.php' );
 
 }
-
-// function gattoverde_theme_settings_page() {
-// 	// generation of sub page 
-// }
 
 function gattoverde_theme_css_page() {
 
