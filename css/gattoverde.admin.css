@@ -1,0 +1,13 @@
+/**
+ * @package gattoverde
+ */
+
+.gattoverde-general-form,
+.gattoverde-sidebar-preview { display: inline-block; float: left; }
+
+.gattoverde-sidebar-preview { width: 280px; background-color: #1F1F1F; padding: 20px; text-align: center; margin-right: 20px; }
+.gattoverde-sidebar { display: block; text-align: center; }
+h1.gattoverde-username,
+h2.gattoverde-user-description { font-weight: 100; color: #fff; }
+h1.gattoverde-username { font-size: 24px; margin: 0 0 10px; }
+h2.gattoverde-user-description { font-size: 13px; margin: 0 0 20px; }

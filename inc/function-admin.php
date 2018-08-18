@@ -27,6 +27,7 @@ function gattoverde_custom_settings() {
 
 	register_setting( 'gattoverde-settings-group', 'first_name' );
 	register_setting( 'gattoverde-settings-group', 'last_name' );
+	register_setting( 'gattoverde-settings-group', 'user_description' );
 	register_setting( 'gattoverde-settings-group', 'twitter_handler', 'gattoverde_sanitize_twitter_handler' );
 	register_setting( 'gattoverde-settings-group', 'facebook_handler' );
 	register_setting( 'gattoverde-settings-group', 'gplus_handler' );
@@ -34,6 +35,7 @@ function gattoverde_custom_settings() {
 	add_settings_section( 'gattoverde-sidebar-options', 'Sidebar Options', 'gattoverde_sidebar_options', 'x_gattoverde' );
 
 	add_settings_field( 'sidebar-name', 'Full Name', 'gattoverde_sidebar_name', 'x_gattoverde', 'gattoverde-sidebar-options' );
+	add_settings_field( 'sidebar-user-description', 'User Description', 'gattoverde_sidebar_user_description', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-twitter', 'Twitter Handler', 'gattoverde_sidebar_twitter', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-facebook', 'Facebook Handler', 'gattoverde_sidebar_facebook', 'x_gattoverde', 'gattoverde-sidebar-options' );
 	add_settings_field( 'sidebar-gplus', 'Google+ Handler', 'gattoverde_sidebar_gplus', 'x_gattoverde', 'gattoverde-sidebar-options' );
@@ -47,12 +49,15 @@ function gattoverde_sidebar_options() {
 }
 
 function gattoverde_sidebar_name() {
-
 	$first_name = esc_attr( get_option( 'first_name' ) );
 	$last_name = esc_attr( get_option( 'last_name' ) );
 
 	echo '<input type="text" name="first_name" value="' . $first_name . '" placeholder="First Name" />';
 	echo '<input type="text" name="last_name" value="' . $last_name . '" placeholder="Last Name" />';
+}
+function gattoverde_sidebar_user_description() {
+	$user_description = esc_attr( get_option( 'user_description' ) );
+	echo '<input type="text" name="user_description" value="' . $user_description . '" placeholder="Someting about you" />';
 
 }
 
