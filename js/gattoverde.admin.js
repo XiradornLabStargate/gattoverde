@@ -33,4 +33,18 @@ jQuery(document).ready( function() {
 
 	} );
 
+	$( '#remove-picture' ).on( 'click', function( e ) {
+
+		e.preventDefault();
+
+		var answer = confirm( "Are you sure to remove the Profile Picture Image?" );
+
+		if ( answer == true ) {
+			$( '#profile-picture' ).val( '' );
+			$( '.gattoverde-general-form' ).submit();
+		}
+		return;
+
+	} );
+
 } );

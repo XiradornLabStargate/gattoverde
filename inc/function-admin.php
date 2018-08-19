@@ -45,19 +45,23 @@ function gattoverde_custom_settings() {
 	add_settings_field( 'sidebar-gplus', 'Google+ Handler', 'gattoverde_sidebar_gplus', 'x_gattoverde', 'gattoverde-sidebar-options' );
 
 	// THEME OPTIONS
-	register_setting( 'gattoverde-theme-options-group', 'post_formats', 'gattoverde_post_formats_callback' );
+	register_setting( 'gattoverde-theme-options-group', 'post_formats' );
+	register_setting( 'gattoverde-theme-options-group', 'custom_header' );
+	register_setting( 'gattoverde-theme-options-group', 'custom_background' );
 
 	add_settings_section( 'gattoverde-theme-options', 'Theme Options', 'gattoverde_theme_options', 'x_gattoverde_theme_options' );
 
 	add_settings_field( 'post-formats', 'Post Formats', 'gattoverde_post_formats', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
+	add_settings_field( 'custom-header', 'Custom Header', 'gattoverde_custom_header', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
+	add_settings_field( 'custom-background', 'Custom Background', 'gattoverde_custom_background', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
 	
 }
 
 ////// THEME OPTIONS
-// Post formats callback function
-function gattoverde_post_formats_callback( $input ) {
-	return $input;
-}
+// Post formats callback function -- not needed
+// function gattoverde_post_formats_callback( $input ) {
+// 	return $input;
+// }
 
 // activate specific theme support
 function gattoverde_theme_options() {
@@ -76,6 +80,20 @@ function gattoverde_post_formats() {
 	echo $output;
 }
 
+function gattoverde_custom_header() {
+	$options = get_option( 'custom_header' );
+	$checked = ( @$options == 1 ) ? ' checked="checked"' : '';
+	
+	echo '<label><input type="checkbox" id="custom_header" name="custom_header" value="1" ' . $checked . ' /> Activate Custom Header</label><br>';
+}
+
+function gattoverde_custom_background() {
+	$options = get_option( 'custom_background' );
+	$checked = ( @$options == 1 ) ? ' checked="checked"' : '';
+	
+	echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" ' . $checked . ' /> Activate Custom Header</label><br>';
+}
+
 function gattoverde_theme_options_page() {
 	
 	// generation of sub page 
@@ -91,8 +109,14 @@ function gattoverde_sidebar_options() {
 function gattoverde_sidebar_profile_picture() {
 	$profile_picture = esc_attr( get_option( 'profile_picture' ) );
 
-	echo '<input type="button" value="Upload profile Picture" id="upload-button" class="button button-secondary"/>';
-	echo '<input type="hidden" name="profile_picture" id="profile-picture" value="' . $profile_picture . '" />';
+	if ( $profile_picture ) {
+		echo '<input type="button" value="Replace Profile Picture" id="upload-button" class="button button-secondary"/> ';
+		echo '<input type="button" value="Remove Picture" id="remove-picture" class="button button-secondary" />';
+		echo '<input type="hidden" name="profile_picture" id="profile-picture" value="' . $profile_picture . '" />';
+	} else {
+		echo '<input type="button" value="Replace Profile Picture" id="upload-button" class="button button-secondary"/>';
+		echo '<input type="hidden" name="profile_picture" id="profile-picture" value="' . $profile_picture . '" />';
+	}
 }
 function gattoverde_sidebar_name() {
 	$first_name = esc_attr( get_option( 'first_name' ) );

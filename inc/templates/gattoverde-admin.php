@@ -24,5 +24,5 @@
 <form method="post" action="options.php" class="gattoverde-general-form">
 	<?php settings_fields( 'gattoverde-settings-group' ) ?>
 	<?php do_settings_sections( 'x_gattoverde' ) ?>
-	<?php submit_button(); ?>
+	<?php submit_button( 'Save', 'primary', 'btnSubmit' ); ?>
 </form>

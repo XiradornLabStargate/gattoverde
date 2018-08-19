@@ -5,6 +5,7 @@
  * Theme Option Functions
  */
 
+/// POST FORMAT
 $options = get_option( 'post_formats' );
 
 $formats = array( 'aside', 'image', 'gallery', 'link', 'quote', 'status', 'video', 'audio', 'chat' );
@@ -17,5 +18,23 @@ foreach ( $formats as $format ) {
 if ( !empty( $options ) ) {
 
 	add_theme_support( 'post-formats', $options );
+
+}
+
+/// HEADER
+$options = get_option( 'custom_header' );
+
+if ( @$options == 1 ) {
+
+	add_theme_support( 'custom-header' );
+
+}
+
+/// BACKGROUND
+$options = get_option( 'custom_background' );
+
+if ( @$options == 1 ) {
+
+	add_theme_support( 'custom-background' );
 
 }
