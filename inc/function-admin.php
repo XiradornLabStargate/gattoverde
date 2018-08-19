@@ -17,6 +17,8 @@ function gattoverde_add_admin_page() {
 	add_submenu_page( 'x_gattoverde', 'Gatto Verde Theme Options', 'Theme Options', 'manage_options', 'x_gattoverde_theme_options', 'gattoverde_theme_options_page' );
 
 	add_submenu_page( 'x_gattoverde', 'Gatto Verde CSS Options', 'Custom CSS', 'manage_options', 'x_gattoverde_css', 'gattoverde_theme_css_page' );
+	
+	add_submenu_page( 'x_gattoverde', 'Gatto Verde Contact Page', 'Contact Page', 'manage_options', 'x_gattoverde_contact_page', 'gattoverde_contact_page' );
 
 	// Activate the custom settings
 	add_action( 'admin_init', 'gattoverde_custom_settings' );
@@ -55,6 +57,13 @@ function gattoverde_custom_settings() {
 	add_settings_field( 'custom-header', 'Custom Header', 'gattoverde_custom_header', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
 	add_settings_field( 'custom-background', 'Custom Background', 'gattoverde_custom_background', 'x_gattoverde_theme_options', 'gattoverde-theme-options' );
 	
+	// Contact Form Option
+	register_setting( 'gattoverde-contact-options', 'activate_contact' );
+
+	add_settings_section( 'gattoverde-contact-section', 'Contact Form', 'gattoverde_contact_section', 'x_gattoverde_contact_page' );
+
+	add_settings_field( 'activate-form', 'Activate Contact Form', 'gattoverde_activate_contact', 'x_gattoverde_contact_page', 'gattoverde-contact-section' );
+
 }
 
 ////// THEME OPTIONS
@@ -156,11 +165,29 @@ function gattoverde_theme_create_page() {
 
 	// generation of admin main page
 	require_once( get_template_directory() . '/inc/templates/gattoverde-admin.php' );
-
+	
 }
 
 function gattoverde_theme_css_page() {
-
+	
 	// CSS subpages
+	
+}
+
+//// Contact form section
+function gattoverde_contact_section() {
+	echo 'Activate/Deactivate Contact Form Page';
+}
+
+function gattoverde_activate_contact() {
+	$options = get_option( 'activate_contact' );
+	$checked = ( @$options == 1 ) ? ' checked="checked"' : '';
+	
+	echo '<label><input type="checkbox" id="activate_contact" name="activate_contact" value="1" ' . $checked . ' /></label><br>';
+}
+
+function gattoverde_contact_page() {
+
+	require_once( get_template_directory() . '/inc/templates/gattoverde-contact-form.php' );
 
 }
