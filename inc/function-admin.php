@@ -16,7 +16,7 @@ function gattoverde_add_admin_page() {
 
 	add_submenu_page( 'x_gattoverde', 'Gatto Verde Theme Options', 'Theme Options', 'manage_options', 'x_gattoverde_theme_options', 'gattoverde_theme_options_page' );
 
-	add_submenu_page( 'x_gattoverde', 'Gatto Verde CSS Options', 'Custom CSS', 'manage_options', 'x_gattoverde_css', 'gattoverde_theme_css_page' );
+	add_submenu_page( 'x_gattoverde', 'Gatto Verde CSS Options', 'Custom CSS', 'manage_options', 'x_gattoverde_custom_css_page', 'gattoverde_custom_css_page' );
 	
 	add_submenu_page( 'x_gattoverde', 'Gatto Verde Contact Page', 'Contact Page', 'manage_options', 'x_gattoverde_contact_page', 'gattoverde_contact_page' );
 
@@ -63,6 +63,13 @@ function gattoverde_custom_settings() {
 	add_settings_section( 'gattoverde-contact-section', 'Contact Form', 'gattoverde_contact_section', 'x_gattoverde_contact_page' );
 
 	add_settings_field( 'activate-form', 'Activate Contact Form', 'gattoverde_activate_contact', 'x_gattoverde_contact_page', 'gattoverde-contact-section' );
+
+	// Custom CSS Option
+	register_setting( 'gattoverde-custom-css-options', 'gattoverde_css', 'gattoverde_sanitize_custom_css' );
+
+	add_settings_section( 'gattoverde-custom-css-section', 'Custom CSS', 'gattoverde_custom_css_section', 'x_gattoverde_custom_css_page' );
+
+	add_settings_field( 'custom-css', 'Custom CSS Code', 'gattoverde_custom_css', 'x_gattoverde_custom_css_page', 'gattoverde-custom-css-section' );
 
 }
 
@@ -168,12 +175,6 @@ function gattoverde_theme_create_page() {
 	
 }
 
-function gattoverde_theme_css_page() {
-	
-	// CSS subpages
-	
-}
-
 //// Contact form section
 function gattoverde_contact_section() {
 	echo 'Activate/Deactivate Contact Form Page';
@@ -190,4 +191,27 @@ function gattoverde_contact_page() {
 
 	require_once( get_template_directory() . '/inc/templates/gattoverde-contact-form.php' );
 
+}
+
+/// CUSTOM CSS PAGE SUPPORT
+function gattoverde_sanitize_custom_css( $input ) {
+	$output = esc_textarea( $input );
+	return $output;
+}
+
+function gattoverde_custom_css_section() {
+	echo 'Customize your theme with your own Custom CSS';
+}
+
+function gattoverde_custom_css() {
+	$custom_css = get_option( 'gattoverde_css' );
+	$custom_css = ( empty( $custom_css ) ) ? '/* Sunset Theme Custom CSS */' : $custom_css;
+	echo '<div id="customCssEditor">' . $custom_css . '</div>';
+	echo '<textarea id="gattoverde_css" name="gattoverde_css" style="display:none;visibility: hidden;">'. $custom_css .'</textarea>';
+}
+
+function gattoverde_custom_css_page() {
+	
+	require_once( get_template_directory() . '/inc/templates/gattoverde-custom-css.php' );
+	
 }
