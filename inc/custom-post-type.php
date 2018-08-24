@@ -11,6 +11,13 @@ if ( @$options == 1 ) {
 
 	add_action( 'init', 'gattoverde_contact_custom_post_type' );
 
+	// use a filter because we want sent some vars to a specific callback function
+	// add_filter( 'menage_MYCUSTOMPOSTTYPE_posts_columns' );
+	add_filter( 'manage_gattoverde-contact_posts_columns', 'gattoverde_set_gattoverde_contact_columns' );
+
+	// now we can customize the editing property of the single column
+	add_action( 'manage_gattoverde-contact_posts_custom_column', 'gattoverde_set_gattoverde_custom_column', 10, 2 );
+
 }
 
 /** Contact CPT */
@@ -35,5 +42,42 @@ function gattoverde_contact_custom_post_type() {
 	);
 
 	register_post_type( 'gattoverde-contact', $args );
+
+}
+
+// function for generate filter
+function gattoverde_set_gattoverde_contact_columns( $columns ) {
+
+	// example we can hide the author column in this way
+	// unset( $columns[ 'author' ] );
+	// return $columns;
+	
+	$newColumns = array();
+	$newColumns[ 'title' ] = 'Full Name';
+	$newColumns[ 'message' ] = 'Message';
+	$newColumns[ 'email' ] = 'Email';
+	$newColumns[ 'date' ] = 'Date';
+	return $newColumns;
+
+}
+
+// this function loops throught the single element in the db
+function gattoverde_set_gattoverde_custom_column( $column, $post_id ) {
+
+	switch ( $column ) {
+
+		case 'message' :
+			echo get_the_excerpt();
+		break;
+
+		case 'email' :
+			//email column
+		break;
+		
+		default:
+			// code...
+		break;
+	
+	}
 
 }
