@@ -37,3 +37,23 @@ function gattoverde_load_admin_scripts( $hook ) {
 }
 
 add_action( 'admin_enqueue_scripts', 'gattoverde_load_admin_scripts' );
+
+/**
+ * FrontEnd Code embedding
+ */
+
+function gattoverde_load_scripts() {
+
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', [], '4.1.3', 'all' );
+	wp_enqueue_style( 'gattoverde', get_template_directory_uri() . '/css/gattoverde.css', [], '1.0.0', 'all' );
+
+	wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.min.js', [], '1.12.4', true );
+	wp_enqueue_script( 'jquery' );
+
+
+	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', [ 'jquery' ], '4.1.3', true );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'gattoverde_load_scripts' );
