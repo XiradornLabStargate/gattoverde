@@ -20,3 +20,29 @@
 	<title>Document</title>
 </head>
 <body <?php body_class(); ?>>
+
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-lg-12">
+				
+				<div class="header-container text-center background-image" style="background-image: url(<?php header_image(); ?>);">
+					
+					<div class="header-content table">
+						<div class="table-cell">
+							<h1 class="site-title gattoverde-icon">
+								<span class="gattoverde-logo"></span>
+								<span class="d-none"><?php bloginfo( 'name' ); ?></span>
+							</h1>
+							<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+						</div>
+					</div><!-- .header-content -->
+
+					<div class="nav container"></div><!-- .header-content -->
+
+				</div><!-- .header-container -->
+
+			</div><!-- .col-xs-12 -->
+		</div><!-- .row -->
+
+	</div><!-- .container-fluid -->

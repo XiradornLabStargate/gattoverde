@@ -46,6 +46,7 @@ function gattoverde_load_scripts() {
 
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', [], '4.1.3', 'all' );
 	wp_enqueue_style( 'gattoverde', get_template_directory_uri() . '/css/gattoverde.css', [], '1.0.0', 'all' );
+	wp_enqueue_style( 'raleway', 'https://fonts.googleapis.com/css?family=Raleway:200,300,500' );
 
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.min.js', [], '1.12.4', true );
