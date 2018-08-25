@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				
-				<div class="header-container text-center background-image" style="background-image: url(<?php header_image(); ?>);">
+				<header class="header-container text-center background-image" style="background-image: url(<?php header_image(); ?>);">
 					
 					<div class="header-content table">
 						<div class="table-cell">
@@ -39,9 +39,20 @@
 						</div>
 					</div><!-- .header-content -->
 
-					<div class="nav container"></div><!-- .header-content -->
+					<div class="nav-container">
+						
+						<nav class="navbar navbar-expand-lg navbar-light navbar-gattoverde">
+							<?php wp_nav_menu( array(
+								'theme_location'	=> 'primary',
+								'container'			=> '',
+								'menu_class'		=> 'navbar-nav',
+								'walker'			=> new Walker_Gattoverde_Nav_Primary(),
+							) ); ?>
+						</nav>
 
-				</div><!-- .header-container -->
+					</div><!-- .header-content -->
+
+				</header><!-- .header-container -->
 
 			</div><!-- .col-xs-12 -->
 		</div><!-- .row -->

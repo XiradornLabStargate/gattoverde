@@ -38,3 +38,11 @@ if ( @$options == 1 ) {
 	add_theme_support( 'custom-background' );
 
 }
+
+/// Activate Menu Option
+function gattoverde_register_nav_menu() {
+
+	register_nav_menu( 'primary', 'Header Menu Navigation' );
+
+}
+add_action( 'after_setup_theme', 'gattoverde_register_nav_menu' );
