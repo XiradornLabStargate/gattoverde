@@ -39,6 +39,8 @@ if ( @$options == 1 ) {
 
 }
 
+add_theme_support( 'post-thumbnails' );
+
 /// Activate Menu Option
 function gattoverde_register_nav_menu() {
 
@@ -46,3 +48,38 @@ function gattoverde_register_nav_menu() {
 
 }
 add_action( 'after_setup_theme', 'gattoverde_register_nav_menu' );
+
+/**
+ * Content Functions
+ */
+
+function gattoverde_posted_meta() {
+	$posted_on = human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) );
+
+	$categories = get_the_category();
+	$separator = ', ';
+	$output = '';
+
+	$i = 1;
+
+	if ( !empty( $categories ) ) :
+
+		foreach ($categories as $category) :
+
+			if ( $i > 1 ) {
+				$output .= $separator;
+			}
+
+			$output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( "View all post in%s", $category->name ) . '">' . esc_html( $category->name ) . '</a>';
+			$i++;
+			
+		endforeach;
+
+	endif;
+
+	return '<span class="posted-on">Posted <a href="' . esc_url( get_permalink() ) . '">' . $posted_on . '</a> ago</span> / <span class="posted-in">' . $output . '</span>';
+}
+
+function gattoverde_posted_footer() {
+
+}
