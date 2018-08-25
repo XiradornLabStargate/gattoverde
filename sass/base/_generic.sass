@@ -1,0 +1,31 @@
+/**
+ * @package gattoverde
+ */
+
+html, body 
+	font-family: $body-font
+
+a
+	+animate( all, 320ms )
+	color: $primary-color
+	
+	&:hover, &:focus
+		text:
+			decoration: none
+		color: $dark-grey
+
+
+.background-image 
+	background:
+		size: cover	
+		position: center center
+		repeat: no-repeat
+
+.table 
+	display: table
+	width: 100%
+	height: 100%
+
+	.table-cell 
+		display: table-cell
+		vertical-align: middle

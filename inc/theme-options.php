@@ -92,15 +92,15 @@ function gattoverde_posted_footer() {
 		} elseif ( $comments_num == 1 ) {
 			$comments = __( '1 Comment' );
 		} else {
-			$comments = __( 'Comments' );
+			$comments = $comments_num . ' ' . __( 'Comments' );
 		}
-		$comments = '<a href="' . get_comments_link() . '">' . $comments . ' <span class="gattoverde-icon gattoverde-comment"></a>';
+		$comments = '<a class="comments-link" href="' . get_comments_link() . '">' . $comments . ' <span class="gattoverde-icon gattoverde-comment"></a>';
 
 	} else {
 		$comments = __( 'Comments are closed' );
 	}
 
-	return '<div class="post-footer-container"><div class="row"><div class="col-nd-12 col-lg-6">' . get_the_tag_list( '<div class="tags-list"><span class="gattoverde-icon gattoverde-tag"> </span>', ' ', '</div>' ) . '</div><div class="col-md-12 col-lg-6">' . $comments . '</div></div></div>';
+	return '<div class="post-footer-container"><div class="row"><div class="col-nd-12 col-lg-6">' . get_the_tag_list( '<div class="tags-list"><span class="gattoverde-icon gattoverde-tag"> </span>', ' ', '</div>' ) . '</div><div class="col-md-12 col-lg-6 text-right">' . $comments . '</div></div></div>';
 
 }
 ?>

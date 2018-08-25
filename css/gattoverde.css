@@ -5,8 +5,17 @@
 /**
  * Mixins and Variables
  */
+/**
+ * @package gattoverde
+ */
+/**
+ * @package gattoverde
+ */
 /*Font Icon 
  *------------------------------------------------
+ */
+/**
+ * @package gattoverde
  */
 @font-face {
   font-family: "sunset-icon";
@@ -87,17 +96,31 @@
   content: "";
 }
 
+/**
+ * Generic
+ */
+/**
+ * @package gattoverde
+ */
 html, body {
   font-family: "Raleway", sans-serif;
 }
 
-/**
- * Generic
- */
-.background-image background {
-  position: cover;
-  position: center center;
-  repeat: no-repeat;
+a {
+  -webkit-transition: all 320ms ease;
+  -o-transition: all 320ms ease;
+  transition: all 320ms ease;
+  color: #000000;
+}
+a:hover, a:focus {
+  text-decoration: none;
+  color: #333333;
+}
+
+.background-image {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .table {
@@ -193,6 +216,126 @@ html, body {
   -webkit-transition: all 320ms ease;
   -o-transition: all 320ms ease;
   transition: all 320ms ease;
+}
+
+/**
+ * Standard Post Format
+ */
+article {
+  margin-bottom: 60px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 200;
+}
+h1.entry-title {
+  line-height: 1.5rem;
+  margin: 40px 0 20px;
+  padding: 0;
+}
+h1.entry-title::before, h1.entry-title::after {
+  content: "~";
+  display: inline-block;
+  position: relative;
+}
+h1.entry-title::before {
+  margin-right: 10px;
+}
+h1.entry-title::after {
+  margin-left: 10px;
+}
+
+.entry-meta {
+  font-size: 13px;
+  font-weight: 300;
+  font-color: #898989;
+}
+.entry-meta a {
+  font-weight: 500;
+  color: #898989;
+}
+.entry-meta a:hover, .entry-meta a:focus {
+  color: #333333;
+}
+
+.entry-excerpt {
+  margin: 30px 0 16px;
+}
+.entry-excerpt p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5em;
+  letter-spacing: 0.02em;
+}
+
+.entry-footer {
+  padding: 10px 5px;
+  border-bottom: 4px solid #f1f1f1;
+  color: #898989;
+  text-transform: uppercase;
+}
+.entry-footer a {
+  color: #898989;
+  display: inline-block;
+  padding: 0 4px;
+  font-size: 12px;
+}
+.entry-footer .tags-list a {
+  padding: 0 4px;
+}
+.entry-footer .tags-list .gattoverde-icon {
+  margin-right: 5px;
+}
+.entry-footer .comments-link .gattoverde-comment {
+  margin-left: 5px;
+}
+
+.standard-featured-link {
+  display: block;
+  position: relative;
+}
+.standard-featured-link:hover .standard-featured::after, .standard-featured-link:focus .standard-featured::after {
+  background-color: transparent;
+}
+
+.standard-featured {
+  display: block;
+  height: 300px;
+  position: relative;
+}
+.standard-featured::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 320ms ease;
+  -o-transition: all 320ms ease;
+  transition: all 320ms ease;
+}
+
+.btn-gattoverde {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  color: #898989;
+  padding: 8px 18px;
+  border: 1px solid #898989;
+  border-radius: 0px;
+  background-color: transparent;
+  -webkit-transition: all 320ms ease;
+  -o-transition: all 320ms ease;
+  transition: all 320ms ease;
+}
+.btn-gattoverde:hover, .btn-gattoverde:focus {
+  color: #ffffff;
+  border-color: #333333;
+  background-color: #333333;
 }
 
 /*# sourceMappingURL=gattoverde.css.map */
