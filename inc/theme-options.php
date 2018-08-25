@@ -82,4 +82,25 @@ function gattoverde_posted_meta() {
 
 function gattoverde_posted_footer() {
 
+	// $comments = '';
+	$comments_num = get_comments_number();
+
+	if ( comments_open() ) {
+
+		if ( $comments_num == 0 ) {
+			$comments = __( 'No Comments' );
+		} elseif ( $comments_num == 1 ) {
+			$comments = __( '1 Comment' );
+		} else {
+			$comments = __( 'Comments' );
+		}
+		$comments = '<a href="' . get_comments_link() . '">' . $comments . ' <span class="gattoverde-icon gattoverde-comment"></a>';
+
+	} else {
+		$comments = __( 'Comments are closed' );
+	}
+
+	return '<div class="post-footer-container"><div class="row"><div class="col-nd-12 col-lg-6">' . get_the_tag_list( '<div class="tags-list"><span class="gattoverde-icon gattoverde-tag"> </span>', ' ', '</div>' ) . '</div><div class="col-md-12 col-lg-6">' . $comments . '</div></div></div>';
+
 }
+?>
