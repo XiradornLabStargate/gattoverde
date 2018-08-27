@@ -310,4 +310,17 @@ h1.entry-title::after {
 .gattoverde-format-image .entry-excerpt.image-caption p {
   margin: 20px 0; }
 
+.gattoverde-format-audio h1 {
+  font-size: 30px; }
+.gattoverde-format-audio h1.entry-title {
+  display: inline-block;
+  mergin-right: 20px; }
+.gattoverde-format-audio h1.entry-title::before, .gattoverde-format-audio h1.entry-title::after {
+  display: none; }
+.gattoverde-format-audio .entry-meta {
+  display: inline-block; }
+.gattoverde-format-audio .entry-content iframe {
+  width: 100%;
+  height: 166px; }
+
 /*# sourceMappingURL=gattoverde.css.map */

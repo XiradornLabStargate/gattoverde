@@ -142,3 +142,17 @@ function gattoverde_get_attachment() {
 
 	return $image;
 }
+
+
+// Audio format support
+function gattoverde_get_embedded_media( $type = array() ) {
+
+	// global $post; ???? probably?
+
+	$content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
+	$embed = get_media_embedded_in_content( $content, $type );
+
+	$media = str_replace( '?visual=true', '?visual=false', $embed[0] );
+	return $media;
+
+}
