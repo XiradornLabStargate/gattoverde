@@ -108,39 +108,34 @@ function gattoverde_posted_footer() {
 // Support functions for post content formats
 // 
 
-function gattoverde_get_attachment() {
+function gattoverde_get_attachment( $num = 1 ) {
 
-	$image = '';
+	$output = '';
 
-	if ( has_post_thumbnail() ) { 
-			
-		$image = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );
-	
+	if ( has_post_thumbnail() && $num == 1 ) { 
+		$output = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );	
 	} else {
-
 		// we have to check if there is an image inside the content and not in featured image
 		$attachments = get_posts( array(
 			'post_type'			=> 'attachment',
-			'posts_per_page'	=> 1,
+			'posts_per_page'	=> $num,
 			'post_parent'		=> get_the_ID()
 		) );
 
-		if ( $attachments ) {
-
-			foreach ($attachments as $attachment) {
-
-				$image = wp_get_attachment_url( $attachment->ID );
-				
+		if ( $attachments && $num == 1 ) {
+			foreach ( $attachments as $attachment ) {
+				$output = wp_get_attachment_url( $attachment->ID );				
 			}
-
+		} elseif ( $attachments && $num > 1 ) {
+			// we create this exception for check if user have up more than one attachments
+			$output = $attachments;
 		}
 
 		// just for not affects post 
 		wp_reset_postdata();
-
 	}
+	return $output;
 
-	return $image;
 }
 
 

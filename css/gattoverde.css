@@ -194,14 +194,15 @@ a:hover, a:focus {
   transition: all 320ms ease; }
 
 article {
-  margin-bottom: 60px; }
+  padding-bottom: 40px;
+  padding-top: 40px; }
 
 h1 {
   font-size: 48px;
   font-weight: 200; }
 h1.entry-title {
   line-height: 1.5rem;
-  margin: 40px 0 20px;
+  margin: 0;
   padding: 0;
   display: inline-block; }
 h1.entry-title::before, h1.entry-title::after {
@@ -290,8 +291,6 @@ h1.entry-title::after {
   border-color: #333333;
   background-color: #333333; }
 
-.gattoverde-format-image {
-  margin-top: 50px; }
 .gattoverde-format-image .entry-header {
   height: 550px;
   position: relative; }
@@ -300,7 +299,7 @@ h1.entry-title::after {
 .gattoverde-format-image h1 a, .gattoverde-format-image .entry-meta a, .gattoverde-format-image .entry-header a {
   color: #ffffff; }
 .gattoverde-format-image h1 {
-  padding-top: 10px; }
+  padding-top: 40px; }
 .gattoverde-format-image .entry-excerpt.image-caption {
   position: absolute;
   left: 0;
@@ -323,9 +322,15 @@ h1.entry-title::after {
   width: 100%;
   height: 166px; }
 
-.gattoverde-format-video header {
-  margin-top: 40px; }
 .gattoverde-format-video h1.entry-title {
   margin-top: 40px; }
+
+.gattoverde-format-gallery h1.entry-title {
+  margin-top: 40px; }
+.gattoverde-format-gallery .standard-featured {
+  height: 350px;
+  display: block; }
+.gattoverde-format-gallery .standard-featured::after {
+  background-color: transparent; }
 
 /*# sourceMappingURL=gattoverde.css.map */
