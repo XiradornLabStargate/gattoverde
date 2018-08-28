@@ -54,6 +54,7 @@ function gattoverde_load_scripts() {
 
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', [ 'jquery' ], '4.1.3', true );
+	wp_enqueue_script( 'gattoverde', get_template_directory_uri() . '/js/gattoverde.js', [ 'jquery' ], '1.0.0', true );
 
 }
 

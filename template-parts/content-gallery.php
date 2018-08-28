@@ -15,30 +15,48 @@
 			$attachments = gattoverde_get_attachment( 7 );
 		?>
 		
-			<div id="post-gallery-<?php the_ID(); ?>" class="carousel slide" data-ride="carousel">
+			<div id="post-gallery-<?php the_ID(); ?>" class="carousel slide gattoverde-carousel-thumb" data-ride="carousel">
 				
 				<div class="carousel-inner">
 					
 					<?php 
-						$i = 0;
-						foreach ( $attachments as $attachment ) : 
-							$active = ( $i == 0 ) ? ' active' : ''; ?>
+
+						$count = count($attachments) - 1;
+
+						for ( $i = 0; $i <= $count; $i++ ) : 
+							$active = ( $i == 0 ) ? ' active' : '';
+
+							$n = ( $i == $count ) ? 0 : $i+1;
+							$next_image = wp_get_attachment_thumb_url( $attachments[$n]->ID );
+							$p = ( $i == 0 ) ? $count : $i-1;
+							$prev_image = wp_get_attachment_thumb_url( $attachments[$p]->ID );
+
+					?>
 
 							<div class="carousel-item<?php echo $active; ?>">
-								<div class="standard-featured background-image" style="background-image: url( <?php echo wp_get_attachment_url( $attachment->ID ); ?> )"></div>
+								<div class="standard-featured background-image" style="background-image: url( <?php echo wp_get_attachment_url( $attachments[$i]->ID ); ?> )"></div>
+
+								<div class="d-hide next-image-preview" data-image="<?php echo $next_image ?>"></div>
+								<div class="d-hide prev-image-preview" data-image="<?php echo $prev_image ?>"></div>
 							</div>
 
-					<?php $i++; endforeach; ?>
+					<?php endfor; ?>
 
 				</div>
 
-				<a class="carousel-control-prev" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
+				<a class="carousel-control-prev gattoverde-carousel-controll" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="prev">
+					<div class="preview-container">
+						<span class="thumbnail-container background-image"></span>
+						<span class="gattoverde-icon gattoverde-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</div><!-- .preview-container -->
 				</a>
-				<a class="carousel-control-next" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
+				<a class="carousel-control-next gattoverde-carousel-controll" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="next">
+					<div class="preview-container">
+						<span class="thumbnail-container background-image"></span>
+						<span class="gattoverde-icon gattoverde-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</div><!-- .preview-container -->
 				</a>
 
 			</div><!-- .carousel -->
