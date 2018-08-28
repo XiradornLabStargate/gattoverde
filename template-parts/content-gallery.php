@@ -11,9 +11,7 @@
 	
 	<header class="entry-header text-center">
 
-		<?php  if ( gattoverde_get_attachment() ) : 
-			$attachments = gattoverde_get_attachment( 7 );
-		?>
+		<?php  if ( gattoverde_get_attachment() ) : ?>
 		
 			<div id="post-gallery-<?php the_ID(); ?>" class="carousel slide gattoverde-carousel-thumb" data-ride="carousel">
 				
@@ -21,26 +19,25 @@
 					
 					<?php 
 
-						$count = count($attachments) - 1;
-
-						for ( $i = 0; $i <= $count; $i++ ) : 
-							$active = ( $i == 0 ) ? ' active' : '';
-
-							$n = ( $i == $count ) ? 0 : $i+1;
-							$next_image = wp_get_attachment_thumb_url( $attachments[$n]->ID );
-							$p = ( $i == 0 ) ? $count : $i-1;
-							$prev_image = wp_get_attachment_thumb_url( $attachments[$p]->ID );
+						$attachments = gattoverde_get_bs_slides( gattoverde_get_attachment( 7 ) );
+						foreach ($attachments as $attachment) : 
 
 					?>
 
-							<div class="carousel-item<?php echo $active; ?>">
-								<div class="standard-featured background-image" style="background-image: url( <?php echo wp_get_attachment_url( $attachments[$i]->ID ); ?> )"></div>
+							<div class="carousel-item<?php echo $attachment['active']; ?>">
+								<div class="standard-featured background-image" style="background-image: url( <?php echo $attachment['url']; ?> )">
+									
+									<div class="d-hide next-image-preview" data-image="<?php echo $attachment['next_image'] ?>"></div>
+									<div class="d-hide prev-image-preview" data-image="<?php echo $attachment['prev_image'] ?>"></div>
 
-								<div class="d-hide next-image-preview" data-image="<?php echo $next_image ?>"></div>
-								<div class="d-hide prev-image-preview" data-image="<?php echo $prev_image ?>"></div>
+									<div class="entry-excerpt image-caption">
+										<p><?php echo $attachment['caption']; ?></p>
+									</div>
+
+								</div>
 							</div>
 
-					<?php endfor; ?>
+					<?php endforeach; ?>
 
 				</div>
 

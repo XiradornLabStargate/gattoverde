@@ -319,6 +319,29 @@ h1
 			margin:
 				top: 40px
 
+	.entry-excerpt
+
+		&.image-caption
+			position: absolute
+			left: 0
+			right: 0
+			bottom: 0
+			@extend %background-gradient
+			margin: 0
+			+animate( transform, 320ms )
+			+transform( translateY( 100% ) )
+
+			p
+				margin: 20px 0
+				color: #ffffff
+
+	&:hover
+
+		.entry-excerpt
+
+			&.image-caption
+				+transform( translateY( 0 ) )
+
 	.standard-featured
 		height: 350px
 		display: block
