@@ -411,3 +411,31 @@ h1
 
 			.thumbnail-container
 				right: 2px
+
+//
+// Gallery Post Format
+// ------------------------------------------------
+.gattoverde-format-quote
+
+	.quote-content
+		font:
+			size: 42px
+			weight: 100
+		line-height: 1.3em
+		letter-spacing: 0.03em
+
+		&::before, &::after
+			content: '\201c'
+			display: inline-block
+			position: relative
+			color: $light-grey
+
+
+		&:after
+			content: '\201e'
+
+	.quote-author
+		color: #bbb
+		font: 
+			size: 12px
+		letter-spacing: 0.05em
