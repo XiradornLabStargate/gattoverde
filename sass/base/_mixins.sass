@@ -13,3 +13,10 @@
 	-ms-transform: $val
 	-o-transform: $val
 	transform: $val
+
+=gvbox( $width, $height: null )
+	width: $width
+	@if variable-exist( $height ) and $height != null
+		height: $height
+	@else
+		height: $width

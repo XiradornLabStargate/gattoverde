@@ -526,4 +526,29 @@ h1.entry-title::after {
   padding-top: 10px;
 }
 
+.gattoverde-format-aside .aside-container {
+  background-color: rgba(0, 0, 0, 0.15);
+  padding-top: 20px;
+}
+.gattoverde-format-aside .aside-featured {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  margin: 0 auto -20px;
+}
+.gattoverde-format-aside .entry-meta {
+  margin-bottom: 5px;
+}
+.gattoverde-format-aside .entry-excerpt {
+  margin-top: 0;
+}
+.gattoverde-format-aside .entry-excerpt p {
+  font-size: 15px;
+}
+.gattoverde-format-aside .entry-footer {
+  border-bottom: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding-right: 10px;
+}
+
 /*# sourceMappingURL=gattoverde.css.map */
