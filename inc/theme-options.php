@@ -186,3 +186,16 @@ function gattoverde_get_bs_slides( $attachments ) {
 	return $output;
 
 }
+
+// Gallery format support
+function gattoverde_grab_url() {
+
+	if ( !preg_match( '/<a\s[^>]*?href=[\'\"](.+?)[\'\"]/i', get_the_content(), $links ) ) {
+
+		return;
+
+	} 
+
+	return esc_url_raw( $links[1] );
+
+}
