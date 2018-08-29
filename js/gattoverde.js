@@ -38,4 +38,40 @@ jQuery( document ).ready( function( $ ) {
 	
 	}
 
+
+	/// Ajax Function
+	$( document ).on( 'click', '.gattoverde-load-more', function() {
+		
+		var that = $( this );
+		var page = that.data( 'page' );
+		var newPage = page + 1;
+		var ajaxurl = that.data( 'url' );
+
+		$.ajax( {
+			
+			url: ajaxurl,
+			type: 'post',
+			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			
+			data: { 
+				page: page,
+				action: 'gattoverde_load_more'
+			},
+
+			error : function( response ) {
+				/* Act on the event */
+				console.log( response );
+			},
+
+			success: function( response ) {
+
+				that.data( 'page', newPage );
+				$( '.gattoverde-posts-container' ).append( response );
+
+			}
+
+		} );
+
+	} );
+
 } );
