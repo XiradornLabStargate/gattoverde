@@ -523,6 +523,19 @@ h1
 //
 // Ajax Loading
 // ------------------------------------------------
+.gattoverde-posts-container
+	padding:
+		top: 40px
+
+	article
+		+animate( all, 320ms )
+		+transform( translateY( 100px ) )
+		// opacity: 0
+
+		&.reveal
+			+transform( translateY( 0px ) )
+			// opacity: 1
+
 .btn-gattoverde-load
 	display: block
 	width: 200px

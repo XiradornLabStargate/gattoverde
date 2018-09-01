@@ -3,10 +3,16 @@
 	Aside post content format
 	@package gattoverde
 */
+
+// use this tecnique if you dont want use JS for assign revela class
+// $class = get_query_var( 'post-class' );
+
 ?>
 
 <!-- the the_ID returns a value. the get_the_ID() need to beh echoed for show the values -->
 
+<!-- // use this tecnique if you dont want use JS for assign revela class -->
+<!-- <article id="post-<?php the_ID(); ?>" <?php post_class( array( 'gattoverde-format-aside', $class ) ); ?>> -->
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'gattoverde-format-aside' ); ?>>
 	
 	<div class="aside-container">

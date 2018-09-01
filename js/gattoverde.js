@@ -1,21 +1,13 @@
 jQuery( document ).ready( function( $ ) {
-	
-	// scripts for frontend
-	
-	// Functions for retrive thumbnails SLIDER ||| OLDER
-	// --------------------------------------------------------------------
-	// $( document ).on( 'mouseenter', '.carousel-control-next', function() {
 
-	// 	var nextThumb = $( '.carousel-item.active' ).find( '.next-image-preview' ).data( 'image' );
-	// 	// console.log(nextThumb);
-	// 	$( this ).find( '.thumbnail-container' ).css( { 'background-image' : 'url( '+nextThumb+' )' } );
-
-	// } );
+	/* init function */
+	revealPosts();
 	
-	// For configurations purposes 
+	/* Vars declaration */
 	var carousel = '.gattoverde-carousel-thumb';
+	var last_scroll = 0;
 	
-	// for first stage
+	/* carousel functions */
 	gattoverde_get_bs_thumbs( carousel );
 
 	$( carousel ).on( 'slid.bs.carousel', function() {
@@ -23,21 +15,20 @@ jQuery( document ).ready( function( $ ) {
 		gattoverde_get_bs_thumbs( carousel );
 		
 	} );
-
+	
 	function gattoverde_get_bs_thumbs( carousel ) {
 
-		$( carousel ).each( function( index, el ) {
+		$( carousel ).each( function() {
 			
 			var nextThumb = $( this ).find( '.carousel-item.active' ).find( '.next-image-preview' ).data( 'image' );
 			var prevThumb = $( this ).find( '.carousel-item.active' ).find( '.prev-image-preview' ).data( 'image' );
-			// console.log(nextThumb);
+			console.log(nextThumb);
 			$( this ).find( '.carousel-control-next' ).find( '.thumbnail-container' ).css( { 'background-image' : 'url( '+nextThumb+' )' } );
 			$( this ).find( '.carousel-control-prev' ).find( '.thumbnail-container' ).css( { 'background-image' : 'url( '+prevThumb+' )' } );
 
 		} );
 	
 	}
-
 
 	/// Ajax Function
 	$( document ).on( 'click', '.gattoverde-load-more:not(.loading)', function() {
@@ -68,20 +59,78 @@ jQuery( document ).ready( function( $ ) {
 
 			success: function( response ) {
 
-				that.data( 'page', newPage );
-				$( '.gattoverde-posts-container' ).append( response );
-
 				setTimeout( function() {
+
+					that.data( 'page', newPage );
+					$( '.gattoverde-posts-container' ).append( response );
 
 					that.removeClass( 'loading' ).find( '.text' ).slideDown( 320 );
 					that.find( '.gattoverde-icon' ).removeClass( 'spin' );
+
+					revealPosts();
 				
-				}, 1000 );
+				}, 1500 );
 
 			}
 
 		} );
 
 	} );
+
+
+	/* scroll functions */
+	$( window ).scroll( function( event ) {
+	
+		var scroll = $( window ).scrollTop();
+
+		if ( Math.abs( scroll - last_scroll ) > $( window ).height() * 0.1 ) {
+			
+			last_scroll = scroll;
+
+			$( '.page-limit' ).each( function( index ) {
+				
+				if ( isVisible( $( this ) ) ) {
+
+					history.replaceState( null, null, $( this ).attr( 'data-page' ) );
+					return (false);
+
+				}
+
+			} );
+
+		}
+
+	} );
+
+	// Helper Functions
+	function revealPosts() {
+
+		var posts = $( 'article:not(.reveal)' );
+		var i = 0;
+
+		setInterval( function(){
+
+			if ( i >= posts.length ) return false; 
+
+				var el = posts[i];
+				$( el ).addClass( 'reveal' ).find( '.gattoverde-carousel-thumb' ).carousel();
+
+			i++;
+
+		}, 200 );
+		
+	}
+
+	function isVisible( element ) {
+
+		var scroll_pos = $( window ).scrollTop();
+		var window_h = $( window ).height();
+		var el_top = $( element ).offset().top;
+		var el_height = $( element ).height();
+		var el_bottom = el_top + el_height;
+
+		return ( ( el_bottom - el_height * 0,25 > scroll_pos ) && ( el_top - (scroll_pos + 0.5 * window_h) ) );
+
+	}
 
 } );
