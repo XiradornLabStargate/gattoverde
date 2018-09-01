@@ -510,7 +510,7 @@ h1
 
 
 //
-// Aside Post Format
+// Footer Post Format
 // ------------------------------------------------
 .gattoverde-footer
 	background:
@@ -519,3 +519,33 @@ h1
 	margin: 
 		top: 40px
 	display: block
+
+//
+// Ajax Loading
+// ------------------------------------------------
+.btn-gattoverde-load
+	display: block
+	width: 200px
+	color: #222
+	font:
+		size: 30px
+	margin: 0 auto
+	opacity: 0.7
+	+animate( opacity, 320ms )
+
+	&:hover, &:focus, &.loading
+		opacity: 1
+
+	&.loading
+		cursor: default
+
+	span
+		display: block
+
+// Spinning animation
+.spin
+	animation:
+		name: spin
+		duration: 1200ms
+		iteration-count: infinite
+		timing-function: linear

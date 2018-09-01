@@ -40,12 +40,15 @@ jQuery( document ).ready( function( $ ) {
 
 
 	/// Ajax Function
-	$( document ).on( 'click', '.gattoverde-load-more', function() {
+	$( document ).on( 'click', '.gattoverde-load-more:not(.loading)', function() {
 		
 		var that = $( this );
 		var page = that.data( 'page' );
 		var newPage = page + 1;
 		var ajaxurl = that.data( 'url' );
+
+		that.addClass( 'loading' ).find( '.text' ).slideUp( 320 );
+		that.find( '.gattoverde-icon' ).addClass( 'spin' );
 
 		$.ajax( {
 			
@@ -67,6 +70,13 @@ jQuery( document ).ready( function( $ ) {
 
 				that.data( 'page', newPage );
 				$( '.gattoverde-posts-container' ).append( response );
+
+				setTimeout( function() {
+
+					that.removeClass( 'loading' ).find( '.text' ).slideDown( 320 );
+					that.find( '.gattoverde-icon' ).removeClass( 'spin' );
+				
+				}, 1000 );
 
 			}
 

@@ -11,6 +11,14 @@
  * Mixins Sections
  * @package gattoverde
  */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 /**
  * Placeholders
  * @package gattoverde
@@ -556,6 +564,34 @@ h1.entry-title::after {
   padding: 20px 0;
   margin-top: 40px;
   display: block;
+}
+
+.btn-gattoverde-load {
+  display: block;
+  width: 200px;
+  color: #222;
+  font-size: 30px;
+  margin: 0 auto;
+  opacity: 0.7;
+  -webkit-transition: opacity 320ms ease;
+  -o-transition: opacity 320ms ease;
+  transition: opacity 320ms ease;
+}
+.btn-gattoverde-load:hover, .btn-gattoverde-load:focus, .btn-gattoverde-load.loading {
+  opacity: 1;
+}
+.btn-gattoverde-load.loading {
+  cursor: default;
+}
+.btn-gattoverde-load span {
+  display: block;
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 1200ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 /*# sourceMappingURL=gattoverde.css.map */
