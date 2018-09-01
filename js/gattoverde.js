@@ -37,18 +37,22 @@ jQuery( document ).ready( function( $ ) {
 		var page = that.data( 'page' );
 		var newPage = page + 1;
 		var ajaxurl = that.data( 'url' );
+		var prev = that.data( 'prev' );
+
+		if ( typeof prev == 'undefined' ) { prev = 0; }
 
 		that.addClass( 'loading' ).find( '.text' ).slideUp( 320 );
 		that.find( '.gattoverde-icon' ).addClass( 'spin' );
 
 		$.ajax( {
 			
-			url: ajaxurl,
-			type: 'post',
+			url		: ajaxurl,
+			type	: 'post',
 			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
 			
 			data: { 
 				page: page,
+				prev: prev,
 				action: 'gattoverde_load_more'
 			},
 
@@ -59,17 +63,41 @@ jQuery( document ).ready( function( $ ) {
 
 			success: function( response ) {
 
-				setTimeout( function() {
+				if ( response == 0 ) {
 
-					that.data( 'page', newPage );
-					$( '.gattoverde-posts-container' ).append( response );
+					$( '.gattoverde-posts-container' ).append( '<h3>The End!</h3><p>No More Posts are here!!!</p>' );
 
-					that.removeClass( 'loading' ).find( '.text' ).slideDown( 320 );
-					that.find( '.gattoverde-icon' ).removeClass( 'spin' );
+					that.slideUp( 320 );
 
-					revealPosts();
-				
-				}, 1500 );
+				} else {
+
+					setTimeout( function() {
+
+						if ( prev == 1 ) {
+							$( '.gattoverde-posts-container' ).prepend( response );
+							newPage = page - 1;
+						} else {
+							$( '.gattoverde-posts-container' ).append( response );
+						}
+
+						if ( newPage == 1 ) {
+						
+							that.slideUp( 320 );
+						
+						} else {
+
+							that.data( 'page', newPage );
+
+							that.removeClass( 'loading' ).find( '.text' ).slideDown( 320 );
+							that.find( '.gattoverde-icon' ).removeClass( 'spin' );
+						
+						}
+
+						revealPosts();
+					
+					}, 1000 );
+
+				}
 
 			}
 
@@ -79,7 +107,7 @@ jQuery( document ).ready( function( $ ) {
 
 
 	/* scroll functions */
-	$( window ).scroll( function( event ) {
+	$( window ).scroll( function() {
 	
 		var scroll = $( window ).scrollTop();
 
@@ -129,7 +157,7 @@ jQuery( document ).ready( function( $ ) {
 		var el_height = $( element ).height();
 		var el_bottom = el_top + el_height;
 
-		return ( ( el_bottom - el_height * 0,25 > scroll_pos ) && ( el_top - (scroll_pos + 0.5 * window_h) ) );
+		return ( ( el_bottom - el_height * 0.25 > scroll_pos ) && ( el_top < (scroll_pos + 0.5 * window_h) ) );
 
 	}
 

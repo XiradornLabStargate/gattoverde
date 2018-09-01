@@ -10,12 +10,24 @@
 	<div id="primary" class="content-area">
 		
 		<main id="main" class="site-main" role="main">
+
+			<?php if ( is_paged() ) : ?>
+				<div class="container container-load-previous text-center">
+					
+					<!-- for having an ajax function we must point to ajax file in the admin folder -->
+					<a class="btn-gattoverde-load gattoverde-load-more" data-page="<?php echo gattoverde_check_paged(1); ?>" data-prev="1" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
+						<span class="gattoverde-icon gattoverde-loading"></span>
+						<span class="text">Load Previous</span>
+					</a>
+
+				</div><!-- .container -->
+			<?php endif; ?>
 			
 			<div class="container gattoverde-posts-container">
 				
 				<?php 
 
-					echo '<div class="page-limit" data-page="/' . gattoverde_check_paged() . '">';
+					echo '<div class="page-limit" data-page="/h101/' . gattoverde_check_paged() . '">';
 					
 					if ( have_posts() ) :
 						while ( have_posts() ) : the_post();

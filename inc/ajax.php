@@ -11,6 +11,11 @@ add_action( 'wp_ajax_gattoverde_load_more', 'gattoverde_load_more' ); // allow o
 function gattoverde_load_more() {
 
 	$paged = $_POST[ 'page' ] + 1;
+	$prev = $_POST[ 'prev' ];
+
+	if ( $prev == 1 && $_POST[ 'page' ] != 1 ) {
+		$paged = $_POST[ 'page' ] - 1;
+	}
 
 	$query = new WP_Query( array(		
 		'post_type'			=> 'post',
@@ -20,7 +25,7 @@ function gattoverde_load_more() {
 	
 	if ( $query->have_posts() ) :
 
-		echo '<div class="page-limit" data-page="/page/' . $paged . '">';
+		echo '<div class="page-limit" data-page="/h101/page/' . $paged . '">';
 
 		while ( $query->have_posts() ) : $query->the_post();
 
@@ -30,6 +35,8 @@ function gattoverde_load_more() {
 
 		echo '</div>';
 	
+	else :
+		echo 0;
 	endif;
 
 	wp_reset_postdata();
@@ -45,7 +52,7 @@ function gattoverde_check_paged( $num = null ) {
 	$output = '';
 
 	if ( is_paged() ) {
-		$output = '/page/' . get_query_var( 'paged' );
+		$output = '/h101/page/' . get_query_var( 'paged' );
 	}
 
 	if ( $num == 1 ) {

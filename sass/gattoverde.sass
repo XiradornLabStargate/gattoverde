@@ -523,6 +523,11 @@ h1
 //
 // Ajax Loading
 // ------------------------------------------------
+.container-load-previous
+	margin:
+		top: 40px
+		bottom: -40px
+
 .gattoverde-posts-container
 	padding:
 		top: 40px
@@ -530,11 +535,11 @@ h1
 	article
 		+animate( all, 320ms )
 		+transform( translateY( 100px ) )
-		// opacity: 0
+		opacity: 0
 
 		&.reveal
 			+transform( translateY( 0px ) )
-			// opacity: 1
+			opacity: 1
 
 .btn-gattoverde-load
 	display: block

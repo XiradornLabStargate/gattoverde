@@ -566,6 +566,11 @@ h1.entry-title::after {
   display: block;
 }
 
+.container-load-previous {
+  margin-top: 40px;
+  margin-bottom: -40px;
+}
+
 .gattoverde-posts-container {
   padding-top: 40px;
 }
@@ -577,12 +582,14 @@ h1.entry-title::after {
   -ms-transform: translateY(100px);
   -o-transform: translateY(100px);
   transform: translateY(100px);
+  opacity: 0;
 }
 .gattoverde-posts-container article.reveal {
   -webkit-transform: translateY(0px);
   -ms-transform: translateY(0px);
   -o-transform: translateY(0px);
   transform: translateY(0px);
+  opacity: 1;
 }
 
 .btn-gattoverde-load {
